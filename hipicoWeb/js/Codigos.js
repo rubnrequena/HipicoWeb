@@ -1,15 +1,13 @@
 /**
  * Created by Ruben on 29-03-2016.
  */
-function UsuarioCode() {}
-UsuarioCode.EXISTE = 1;
-UsuarioCode.NO_EXISTE = -1;
-UsuarioCode.CLAVE_INCORRECTA = -2;
+function NetCode() {}
+NetCode.USUARIO_LOGIN_OK = 0;
+NetCode.USUARIO_LOGIN_INACTIVO = 1;
+NetCode.USUARIO_LOGIN_NOEXISTE = 2;
 
-function TaquillaCode() {}
-TaquillaCode.CONECTADO = 1;
-TaquillaCode.DESCONECTADO = 2;
-TaquillaCode.VENTA_TICKET = 3;
-TaquillaCode.ELIMINA_TICKET = 4;
-TaquillaCode.PREMIA_TICKET = 5;
-TaquillaCode.REPORTE_DIARIO = 6;
+NetCode.TAQUILLA_LOGIN_OK = 10;
+NetCode.TAQUILLA_LOGIN_INACTIVO = 11;
+NetCode.TAQUILLA_LOGIN_NOEXISTE = 12;
+NetCode.TAQUILLA_VENTA_OK = 13;
+NetCode.TAQUILLA_VENTA_RECHAZADA = 14;

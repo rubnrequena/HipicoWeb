@@ -2,9 +2,9 @@ package net
 {
 	public class NetCode
 	{
-		static public const USUARIO_LOGIN_OK:int = 1;
-		static public const USUARIO_LOGIN_INACTIVO:int = 2; 
-		static public const USUARIO_LOGIN_NOEXISTE:int = 3;
+		static public const USUARIO_LOGIN_OK:int = 0;
+		static public const USUARIO_LOGIN_INACTIVO:int = 1; 
+		static public const USUARIO_LOGIN_NOEXISTE:int = 2;
 		
 		static public const TAQUILLA_LOGIN_OK:int = 10;
 		static public const TAQUILLA_LOGIN_INACTIVO:int = 11; 
