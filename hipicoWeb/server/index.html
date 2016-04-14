@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SERVER 2</title>
+    <script src="../js/json2.js"></script>
+    <script src="../js/srsocket.js"></script>
+    <script src="../js/Events.js"></script>
+    <script src="../js/Codigos.js"></script>
+    <script>
+        var socket = new Net("ws://127.0.0.1:3030");
+        function conectar() {
+            socket.addListener(NetEvent.SOCKET_OPEN,socket_open);
+            socket.addListener(NetEvent.SOCKET_CLOSE,socket_close);
+            socket.addListener(ServerEvents.LOGIN,socket_login);
+            socket.addListener(ClientEvents.LOGIN,socket_clientLogin);
+            socket.addListener(ClientEvents.VENTA_GANADOR,socket_clienteVentaGanador);
+            socket.connect();
+        }
+        function desconectar() {
+            socket.close();
+        }
+        function socket_open(e) {
+            console.log(e);
+
+            socket.sendMessage(ServerEvents.LOGIN,{usr:"admin2",psw:"12345"});
+        }
+        function socket_close(e,user) {
+            socket.removeListener(NetEvent.SOCKET_OPEN,socket_open);
+            socket.removeListener(NetEvent.SOCKET_CLOSE,socket_close);
+            socket.removeListener(ServerEvents.LOGIN,socket_login);
+            console.log(e,user);
+        }
+
+        function socket_login (e,d) {
+            if (d.code==UsuarioCode.NO_EXISTE) {
+                console.log("datos invalidos, usuario no existe");
+            } else if (d.code==UsuarioCode.CLAVE_INCORRECTA) {
+                console.log("datos invalidos, contraseña incorecta");
+            } else if (d.code==UsuarioCode.EXISTE) {
+                console.log(e,d);
+            }
+        }
+
+        function socket_clienteVentaGanador (e,d) {
+            console.log(e,d)
+        }
+        function socket_clientLogin (e,d) {
+            console.log("cliente conectado",e,d);
+        }
+    </script>
+</head>
+<body>
+    <button onclick="conectar()">Conectar</button>
+    <button onclick="desconectar()">Desconectar</button>
+</body>
+</html>

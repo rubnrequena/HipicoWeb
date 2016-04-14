@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/json2.js"></script>
+    <script src="../js/srsocket.js"></script>
+    <script src="../js/Events.js"></script>
+    <script>
+        var socket = new Net("ws://127.0.0.1:3032");
+        function conectar() {
+            socket.addListener(NetEvent.SOCKET_OPEN,socket_open);
+            socket.addListener(NetEvent.SOCKET_CLOSE,socket_close);
+            socket.addListener(ClientEvents.LOGIN,socket_login);
+            socket.connect();
+        }
+        function desconectar() {
+            socket.close();
+        }
+        function socket_open(e) {
+            console.log(e);
+
+            socket.sendMessage(ClientEvents.LOGIN,{usr:"dario",psw:"123"});
+            console.log("conectando como dario,123");
+        }
+        function socket_close(e,user) {
+            socket.removeListener(NetEvent.SOCKET_OPEN,socket_open);
+            socket.removeListener(NetEvent.SOCKET_CLOSE,socket_close);
+            socket.removeListener(ClientEvents.LOGIN,socket_login);
+            console.log(e,user);
+        }
+
+        function venta () {
+            socket.sendMessage(ClientEvents.VENTA_GANADOR,{
+                taquillaID:242423,
+                bancaID:1,
+                nombre:"HOPE",
+                numero:5,
+                monto:60,
+                fecha:"hoy",
+                hipodromo:"la rinconada",
+                carrera:3
+            })
+        }
+
+        function socket_login (e,d) {
+            console.log(e,d);
+        }
+    </script>
+</head>
+<body>
+<button onclick="conectar()">Conectar</button>
+<button onclick="desconectar()">Desconectar</button>
+<button onclick="venta()">Vender</button>
+
+</body>
+</html>
