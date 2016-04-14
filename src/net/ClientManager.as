@@ -34,15 +34,16 @@ package net
 					if (result.data[0].activa) {
 						_msg.data = {code:NetCode.TAQUILLA_LOGIN_OK,data:result.data[0]};
 						_clientes.push(_client);
-						_clientes_meta.push(result.data[0]);				
+						_clientes_meta.push(result.data[0]);
+						servers.broadcastMessageTo(_msg,{bancaID:result.data[0].bancaID});			
 					} else {
 						_msg.data = {code:NetCode.TAQUILLA_LOGIN_INACTIVO}
+						servers.broadcastMessageTo(_msg,{bancaID:result.data[0].bancaID});
 					}
 				} else {
 					_msg.data = {code:NetCode.TAQUILLA_LOGIN_NOEXISTE}
 				}
 				_client.sendMessage(_msg);
-				servers.broadcastMessageTo(_msg,{bancaID:result.data[0].bancaID});
 			});
 		}
 		protected function venta_ganador (data:Object):void {

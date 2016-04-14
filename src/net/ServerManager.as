@@ -27,7 +27,6 @@ package net
 					login(_msg.data.usr,_msg.data.psw);
 					break;
 				}
-					
 			}
 		}
 		
